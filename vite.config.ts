@@ -3,13 +3,14 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  base: "/",
   plugins: [react(), tailwindcss()],
 
   build: {
     outDir: "dist",
     sourcemap: false,
+    cssMinify: "esbuild",
     chunkSizeWarningLimit: 800,
-
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -19,5 +20,9 @@ export default defineConfig({
         },
       },
     },
+  },
+
+  resolve: {
+    dedupe: ["react", "react-dom"],
   },
 });
