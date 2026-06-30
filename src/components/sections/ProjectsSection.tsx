@@ -1,54 +1,76 @@
-﻿import { projects, type Project } from "../../data/projects";
+﻿import { projects } from "../../data/projects";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="border-t border-white/10 bg-slate-950 px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-          Projects
-        </p>
+    <section id="projects" className="px-6 py-20 max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold text-white mb-10">
+        Projects
+      </h2>
 
-        <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-          Things I’ve built.
-        </h2>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {projects.map((project: Project) => (
-            <div
-              key={project.name}
-              className="rounded-xl border border-white/10 bg-slate-900 p-6 transition hover:border-cyan-400"
-            >
-              <h3 className="text-xl font-semibold text-white">
+      <div className="grid md:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <div
+            key={project.name}
+            className="p-6 rounded-xl border border-white/10 bg-white/5"
+          >
+            {/* Header */}
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-bold text-white">
                 {project.name}
               </h3>
 
-              <p className="mt-2 text-slate-300">
-                {project.description}
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.technologies.map((technology: string) => (
-                  <span
-                    key={technology}
-                    className="rounded-md bg-slate-800 px-2 py-1 text-xs text-slate-200"
-                  >
-                    {technology}
-                  </span>
-                ))}
-              </div>
-
-              {project.url && (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  className="mt-4 inline-block text-sm text-cyan-400 hover:text-cyan-300"
-                >
-                  View Project →
-                </a>
-              )}
+              <span className="text-xs px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">
+                {project.status}
+              </span>
             </div>
-          ))}
-        </div>
+
+            <p className="text-sm text-gray-400 mt-1">
+              {project.category}
+            </p>
+
+            {/* Problem */}
+            <div className="mt-4">
+              <p className="text-xs text-gray-500">Problem</p>
+              <p className="text-sm text-gray-300">{project.problem}</p>
+            </div>
+
+            {/* Solution */}
+            <div className="mt-3">
+              <p className="text-xs text-gray-500">Solution</p>
+              <p className="text-sm text-white">{project.solution}</p>
+            </div>
+
+            {/* Impact */}
+            <div className="mt-3">
+              <p className="text-xs text-gray-500">Impact</p>
+              <p className="text-sm text-cyan-300">{project.impact}</p>
+            </div>
+
+            {/* Tech stack */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs px-2 py-1 rounded bg-white/10"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Optional link */}
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block mt-4 text-sm text-cyan-400 hover:underline"
+              >
+                View Project →
+              </a>
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );

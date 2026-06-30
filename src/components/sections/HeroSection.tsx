@@ -1,36 +1,94 @@
 ﻿import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "../../animations/motion";
-import { profile } from "../../data/profile";
 
 export function HeroSection() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <section className="relative overflow-hidden px-6 py-24 md:py-36">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_35%)]" />
+
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="max-w-5xl"
+        className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2"
       >
-        <motion.p
-          variants={fadeUp}
-          className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300"
-        >
-          {profile.role}
-        </motion.p>
+        {/* LEFT */}
+        <div>
+          <motion.p
+            variants={fadeUp}
+            className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300"
+          >
+            Full-Stack Engineer & Technical Founder
+          </motion.p>
 
-        <motion.h1
-          variants={fadeUp}
-          className="text-5xl font-extrabold leading-tight tracking-tight text-white md:text-7xl"
-        >
-          {profile.headline}
-        </motion.h1>
+          <motion.h1
+            variants={fadeUp}
+            className="text-5xl font-extrabold leading-tight tracking-tight text-white md:text-7xl"
+          >
+            Building production-ready
+            <br />
+            web apps, Android apps,
+            <br />
+            APIs, and AI systems.
+          </motion.h1>
 
-        <motion.p
+          <motion.p
+            variants={fadeUp}
+            className="mt-8 text-xl leading-9 text-slate-300"
+          >
+            I design and build scalable software systems with clean architecture,
+            performance-first engineering, and production-grade quality.
+          </motion.p>
+
+          {/* CTA */}
+          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              View Case Studies
+            </a>
+
+            <a
+              href="#contact"
+              className="rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-300"
+            >
+              Contact Me
+            </a>
+          </motion.div>
+
+          {/* Trust line */}
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 text-sm text-slate-400"
+          >
+            Available for freelance, consulting, and full-time engineering roles.
+          </motion.p>
+        </div>
+
+        {/* RIGHT PANEL */}
+        <motion.div
           variants={fadeUp}
-          className="mt-8 max-w-3xl text-xl leading-9 text-slate-300"
+          className="hidden md:block"
         >
-          {profile.summary}
-        </motion.p>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <h3 className="text-xl font-bold text-white">
+              Engineering Focus
+            </h3>
+
+            <div className="mt-6 space-y-3 text-sm text-slate-300">
+              <p>✔ Scalable Web Applications</p>
+              <p>✔ Android Development</p>
+              <p>✔ Backend API Systems</p>
+              <p>✔ AI Integration & Automation</p>
+              <p>✔ System Architecture Design</p>
+            </div>
+
+            <div className="mt-6 rounded-xl bg-cyan-400/10 p-4 text-cyan-300">
+              Production-first engineering mindset
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );

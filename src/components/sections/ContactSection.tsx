@@ -1,45 +1,40 @@
-﻿import { Reveal } from "../ui/Reveal";
+﻿export function ContactSection() {
+  const email = "social@cosmas.dev";
 
-export function ContactSection() {
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText(email);
+  };
+
   return (
-    <section
-      id="contact"
-      className="border-t border-white/10 bg-slate-950 px-6 py-24"
-    >
-      <div className="mx-auto max-w-3xl text-center">
-        
-        <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-            Contact
-          </p>
+    <section id="contact" className="py-20 px-6 max-w-5xl mx-auto">
+      <h2 className="text-3xl font-bold text-white mb-8">Contact</h2>
 
-          <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-            Let’s build something together.
-          </h2>
+      <div className="grid gap-6 md:grid-cols-2">
 
-          <p className="mt-6 text-slate-300">
-            I’m open to full-time roles, freelance projects, and technical collaborations.
-          </p>
-        </Reveal>
+        <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+          <h3 className="text-white font-semibold mb-2">Email</h3>
 
-        <Reveal className="mt-10">
-          <a
-            href="mailto:hello@cosmas.dev"
-            className="inline-flex items-center justify-center rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-cyan-400"
+          <p className="text-slate-300 mb-4">{email}</p>
+
+          <button
+            onClick={copyEmail}
+            className="text-sm text-cyan-400 hover:text-cyan-300"
           >
-            Send Email
-          </a>
-        </Reveal>
+            Copy email
+          </button>
+        </div>
 
-        <Reveal className="mt-8 flex items-center justify-center gap-6 text-sm text-slate-400">
-          <a href="https://github.com/" target="_blank" className="hover:text-white">
-            GitHub
-          </a>
+        <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+          <h3 className="text-white font-semibold mb-2">GitHub</h3>
 
-          <a href="https://linkedin.com/" target="_blank" className="hover:text-white">
-            LinkedIn
+          <a
+            href="https://github.com/cajazi"
+            className="text-slate-300 hover:text-white"
+            target="_blank"
+          >
+            github.com/cajazi
           </a>
-        </Reveal>
+        </div>
 
       </div>
     </section>
