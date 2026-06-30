@@ -1,0 +1,4 @@
+﻿Create a 1200x630 dark tech banner:
+Text: "Cosmas Technologies"
+Subtitle: "Full-Stack Developer | APIs | AI Systems"
+Style: modern, minimal, gradient blue-black, futuristic UI glow
