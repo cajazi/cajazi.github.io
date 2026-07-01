@@ -6,8 +6,8 @@ import { useSeo } from "../hooks/useSeo";
 
 export function ProjectDetailPage() {
   const { slug } = useParams();
-  const project = useDataSource(
-    () => (slug ? projectDataSource.getBySlug(slug) : undefined),
+  const { data: project } = useDataSource(
+    () => (slug ? projectDataSource.getBySlug(slug) : Promise.resolve(undefined)),
     undefined,
     [slug]
   );

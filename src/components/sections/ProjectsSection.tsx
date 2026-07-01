@@ -5,7 +5,8 @@ import { useDataSource } from "../../hooks/useDataSource";
 
 export function ProjectsSection() {
   const [filter, setFilter] = useState<"all" | "android" | "web" | "backend" | "ai">("all");
-  const projects = useDataSource(() => projectDataSource.getAll(), []);
+  const { data } = useDataSource(() => projectDataSource.getAll(), []);
+  const projects = data ?? [];
 
   const filteredProjects = projects.filter(
     (p) => filter === "all" || p.category === filter

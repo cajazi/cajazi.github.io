@@ -1,8 +1,19 @@
-import { CachedDataLayer, LocalDataSource } from "./sources";
+import { APIDataSource, CachedDataLayer, LocalDataSource } from "./sources";
+import { ContentRepository } from "./contentRepository";
+import { validateBlogPosts } from "./validators";
 import type { BlogPost } from "../types/content";
 
 export const blogPosts: BlogPost[] = [];
 
-export const blogDataSource = new CachedDataLayer(
-  new LocalDataSource(blogPosts)
+const localBlogDataSource = new LocalDataSource(blogPosts);
+
+const avioraBlogDataSource = new CachedDataLayer(
+  new APIDataSource<BlogPost>("/blog", {
+    validate: validateBlogPosts,
+  })
+);
+
+export const blogDataSource = new ContentRepository(
+  avioraBlogDataSource,
+  localBlogDataSource
 );

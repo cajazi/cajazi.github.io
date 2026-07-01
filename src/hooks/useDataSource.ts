@@ -1,33 +1,51 @@
 import { useEffect, useState, type DependencyList } from "react";
-import type { DataResult } from "../data/sources";
 
-function isPromise<T>(value: DataResult<T>): value is Promise<T> {
-  return value instanceof Promise;
+interface DataSourceState<T> {
+  data: T | null;
+  loading: boolean;
+  error: Error | null;
 }
 
 export function useDataSource<T>(
-  load: () => DataResult<T>,
-  fallback: T,
+  load: () => Promise<T>,
+  fallback: T | null = null,
   deps: DependencyList = []
-) {
-  const [state, setState] = useState<T>(() => {
-    const initial = load();
-    return isPromise(initial) ? fallback : initial;
+): DataSourceState<T> {
+  const [state, setState] = useState<DataSourceState<T>>({
+    data: fallback,
+    loading: true,
+    error: null,
   });
 
   useEffect(() => {
     let active = true;
-    const result = load();
 
-    if (isPromise(result)) {
-      result.then((value) => {
+    setState((current) => ({
+      ...current,
+      loading: true,
+      error: null,
+    }));
+
+    Promise.resolve()
+      .then(load)
+      .then((value) => {
         if (active) {
-          setState(value);
+          setState({
+            data: value,
+            loading: false,
+            error: null,
+          });
+        }
+      })
+      .catch((error: unknown) => {
+        if (active) {
+          setState({
+            data: fallback,
+            loading: false,
+            error: error instanceof Error ? error : new Error(String(error)),
+          });
         }
       });
-    } else {
-      setState(result);
-    }
 
     return () => {
       active = false;

@@ -1,4 +1,6 @@
-import { CachedDataLayer, LocalDataSource } from "./sources";
+import { APIDataSource, CachedDataLayer, LocalDataSource } from "./sources";
+import { ContentRepository } from "./contentRepository";
+import { validateProjects } from "./validators";
 import type { ContentItem } from "../types/content";
 
 export interface Project extends ContentItem {
@@ -135,6 +137,17 @@ export const projects: Project[] = [
   },
 ];
 
-export const projectDataSource = new CachedDataLayer(
-  new LocalDataSource(projects)
+const localProjectDataSource = new LocalDataSource(projects);
+
+const avioraProjectDataSource = new CachedDataLayer(
+  new APIDataSource<Project>("/projects", {
+    validate: validateProjects,
+  })
 );
+
+export const projectRepository = new ContentRepository(
+  avioraProjectDataSource,
+  localProjectDataSource
+);
+
+export const projectDataSource = projectRepository;
