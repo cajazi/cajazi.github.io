@@ -66,23 +66,23 @@ export function ProjectDetailPage() {
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 transition duration-150 ease-out hover:border-cyan-400">
           <p className="text-xs text-gray-500">Problem</p>
           <p className="mt-3 text-sm text-gray-300">{project.problem}</p>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 transition duration-150 ease-out hover:border-cyan-400">
           <p className="text-xs text-gray-500">Solution</p>
           <p className="mt-3 text-sm text-white">{project.solution}</p>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 transition duration-150 ease-out hover:border-cyan-400">
           <p className="text-xs text-gray-500">Impact</p>
           <p className="mt-3 text-sm text-cyan-300">{project.impact}</p>
         </div>
       </div>
 
-      <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-6">
+      <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-6 transition duration-150 ease-out hover:border-cyan-400">
         <p className="text-xs text-gray-500">Media</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {(project.media ?? [{ label: "Media placeholder" }]).map((item) => (
@@ -104,7 +104,7 @@ export function ProjectDetailPage() {
               className="rounded-xl border border-white/10 bg-white/5 p-6"
             >
               <button
-                className="w-full text-left text-sm font-semibold text-white"
+                className="w-full text-left text-sm font-semibold text-white transition-colors duration-150 hover:text-cyan-300"
                 onClick={() =>
                   setExpanded(expanded === section.title ? null : section.title)
                 }
@@ -132,7 +132,7 @@ export function ProjectDetailPage() {
           href={project.links.store}
           target="_blank"
           rel="noreferrer"
-          className="mt-8 inline-block text-sm text-cyan-400 hover:underline"
+          className="mt-8 inline-block text-sm text-cyan-400 transition-colors duration-150 hover:underline"
         >
           View Project &rarr;
         </a>

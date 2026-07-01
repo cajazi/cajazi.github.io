@@ -3,7 +3,7 @@ export function HeroSection() {
     <section className="relative overflow-hidden px-6 py-24 md:py-36">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_35%)]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl animate-[fadeUp_0.5s_ease-out] items-center gap-12 md:grid-cols-2">
         {/* LEFT */}
         <div>
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
@@ -27,14 +27,14 @@ export function HeroSection() {
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition duration-150 ease-out hover:scale-[1.02] hover:bg-cyan-300 active:scale-[0.98]"
             >
               View Case Studies
             </a>
 
             <a
               href="#contact"
-              className="rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-300"
+              className="rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition duration-150 ease-out hover:scale-[1.02] hover:border-cyan-300 hover:text-cyan-300 active:scale-[0.98]"
             >
               Contact Me
             </a>

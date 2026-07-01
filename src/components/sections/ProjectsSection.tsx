@@ -19,7 +19,7 @@ export function ProjectsSection() {
           <button
             key={cat}
             onClick={() => setFilter(cat as any)}
-            className={`px-3 py-1 rounded text-sm border transition ${
+            className={`px-3 py-1 rounded text-sm border transition duration-150 ease-out hover:scale-[1.02] active:scale-[0.98] ${
               filter === cat
                 ? "bg-cyan-500 text-black"
                 : "border-white/20 text-white"
@@ -35,7 +35,7 @@ export function ProjectsSection() {
         {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className="p-6 rounded-xl border border-white/10 bg-white/5"
+            className="p-6 rounded-xl border border-white/10 bg-white/5 transition duration-150 ease-out hover:-translate-y-1 hover:border-cyan-400"
           >
             <div className="flex justify-between items-start">
               <h3 className="text-xl font-bold">{project.title}</h3>
@@ -77,7 +77,7 @@ export function ProjectsSection() {
 
             <Link
               to={`/projects/${project.slug}`}
-              className="inline-block mt-4 text-sm text-cyan-400 hover:underline"
+              className="inline-block mt-4 text-sm text-cyan-400 transition-colors duration-150 hover:underline"
             >
               View Project →
             </Link>

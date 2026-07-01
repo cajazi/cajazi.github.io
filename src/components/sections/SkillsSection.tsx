@@ -29,7 +29,7 @@ export function SkillsSection() {
           ].map((skill) => (
             <div
               key={skill}
-              className="rounded-xl border border-white/10 bg-slate-950 p-5 text-white transition-colors hover:border-cyan-400"
+              className="rounded-xl border border-white/10 bg-slate-950 p-5 text-white transition duration-150 ease-out hover:-translate-y-1 hover:border-cyan-400"
             >
               {skill}
             </div>
