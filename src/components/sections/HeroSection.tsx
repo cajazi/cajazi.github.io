@@ -1,47 +1,30 @@
-﻿import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "../../animations/motion";
-
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden px-6 py-24 md:py-36">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_35%)]" />
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2"
-      >
+      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
         {/* LEFT */}
         <div>
-          <motion.p
-            variants={fadeUp}
-            className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300"
-          >
+          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
             Full-Stack Engineer & Technical Founder
-          </motion.p>
+          </p>
 
-          <motion.h1
-            variants={fadeUp}
-            className="text-5xl font-extrabold leading-tight tracking-tight text-white md:text-7xl"
-          >
+          <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-white md:text-7xl">
             Building production-ready
             <br />
             web apps, Android apps,
             <br />
             APIs, and AI systems.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={fadeUp}
-            className="mt-8 text-xl leading-9 text-slate-300"
-          >
+          <p className="mt-8 text-xl leading-9 text-slate-300">
             I design and build scalable software systems with clean architecture,
             performance-first engineering, and production-grade quality.
-          </motion.p>
+          </p>
 
           {/* CTA */}
-          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="#projects"
               className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
@@ -55,22 +38,16 @@ export function HeroSection() {
             >
               Contact Me
             </a>
-          </motion.div>
+          </div>
 
           {/* Trust line */}
-          <motion.p
-            variants={fadeUp}
-            className="mt-6 text-sm text-slate-400"
-          >
+          <p className="mt-6 text-sm text-slate-400">
             Available for freelance, consulting, and full-time engineering roles.
-          </motion.p>
+          </p>
         </div>
 
         {/* RIGHT PANEL */}
-        <motion.div
-          variants={fadeUp}
-          className="hidden md:block"
-        >
+        <div className="hidden md:block">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
             <h3 className="text-xl font-bold text-white">
               Engineering Focus
@@ -88,8 +65,8 @@ export function HeroSection() {
               Production-first engineering mindset
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

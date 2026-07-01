@@ -22,6 +22,25 @@
     <meta name="twitter:title" content="Cosmas Technologies" />
     <meta name="twitter:description" content="Full-stack developer portfolio with production-grade systems." />
     <meta name="twitter:image" content="/og-image.png" />
+    <script>
+      (function () {
+        try {
+          var redirect = sessionStorage.getItem("redirect");
+
+          if (!redirect) {
+            return;
+          }
+
+          sessionStorage.removeItem("redirect");
+
+          var url = new URL(redirect);
+
+          if (url.origin === window.location.origin) {
+            history.replaceState(null, "", url.pathname + url.search + url.hash);
+          }
+        } catch {}
+      })();
+    </script>
   </head>
 
   <body>

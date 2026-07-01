@@ -1,12 +1,14 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
+    <meta charset="UTF-8" />
     <script>
-      sessionStorage.redirect = location.href;
+      try {
+        sessionStorage.setItem("redirect", location.href);
+      } finally {
+        location.replace("/");
+      }
     </script>
-    <meta http-equiv="refresh" content="0;URL='/'" />
   </head>
   <body></body>
 </html>

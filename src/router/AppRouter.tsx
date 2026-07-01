@@ -1,10 +1,17 @@
-﻿import { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "../layouts/RootLayout";
+import { HomePage } from "../pages/HomePage";
 
-const HomePage = lazy(() =>
-  import("../pages/HomePage").then((module) => ({
-    default: module.HomePage,
+const ProjectDetailPage = lazy(() =>
+  import("../pages/ProjectDetailPage").then((m) => ({
+    default: m.ProjectDetailPage,
+  }))
+);
+
+const NotFoundPage = lazy(() =>
+  import("../pages/NotFoundPage").then((m) => ({
+    default: m.NotFoundPage,
   }))
 );
 
@@ -15,9 +22,21 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/projects/:slug",
         element: (
           <Suspense fallback={<div className="p-6 text-white">Loading...</div>}>
-            <HomePage />
+            <ProjectDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "*",
+        element: (
+          <Suspense fallback={<div className="p-6 text-white">Loading...</div>}>
+            <NotFoundPage />
           </Suspense>
         ),
       },
