@@ -1,44 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { projectDataSource } from "../data/projects";
+import { useDataSource } from "../hooks/useDataSource";
+import { useSeo } from "../hooks/useSeo";
 
 export function ProjectDetailPage() {
   const { slug } = useParams();
-  const project = slug ? projectDataSource.getBySlug(slug) : undefined;
+  const project = useDataSource(
+    () => (slug ? projectDataSource.getBySlug(slug) : undefined),
+    undefined,
+    [slug]
+  );
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!project) {
-      return;
-    }
-
-    document.title = `${project.title} | Case Study`;
-
-    let description = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]'
-    );
-
-    if (!description) {
-      description = document.createElement("meta");
-      description.name = "description";
-      document.head.appendChild(description);
-    }
-
-    description.content = project.problem;
-
-    let canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]'
-    );
-
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-
-    canonical.href = new URL(`/projects/${project.slug}`, window.location.origin)
-      .href;
-  }, [project]);
+  useSeo(project?.seo);
 
   if (!project) {
     return (

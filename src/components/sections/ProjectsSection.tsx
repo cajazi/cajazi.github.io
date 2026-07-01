@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { projectDataSource } from "../../data/projects";
+import { useDataSource } from "../../hooks/useDataSource";
 
 export function ProjectsSection() {
   const [filter, setFilter] = useState<"all" | "android" | "web" | "backend" | "ai">("all");
+  const projects = useDataSource(() => projectDataSource.getAll(), []);
 
-  const filteredProjects = projectDataSource.getAll().filter(
+  const filteredProjects = projects.filter(
     (p) => filter === "all" || p.category === filter
   );
 

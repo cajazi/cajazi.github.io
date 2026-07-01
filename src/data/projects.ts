@@ -1,7 +1,9 @@
-﻿export type Project = {
-  id: string;
+import { CachedDataLayer, LocalDataSource } from "./sources";
+import type { ContentItem } from "../types/content";
+
+export interface Project extends ContentItem {
+  type: "project";
   title: string;
-  slug: string;
 
   category: "android" | "web" | "backend" | "ai";
 
@@ -31,17 +33,12 @@
   media?: {
     label: string;
   }[];
-};
-
-export interface IDataSource<T extends { slug: string; featured: boolean }> {
-  getAll(): T[];
-  getBySlug(slug: string): T | undefined;
-  getFeatured(): T[];
 }
 
 export const projects: Project[] = [
   {
     id: "musicecho",
+    type: "project",
     title: "MusicEcho Player",
     slug: "musicecho-player",
     category: "android",
@@ -57,18 +54,27 @@ export const projects: Project[] = [
     impact:
       "Published on Google Play with production release pipeline and AdMob integration.",
 
+    seo: {
+      title: "MusicEcho Player | Case Study",
+      description:
+        "Many mobile music players are bloated, slow, and lack polished offline-first UX.",
+      canonical: "/projects/musicecho-player",
+      ogType: "article",
+    },
+
     tech: ["Kotlin", "Jetpack Compose", "Media3", "AdMob"],
 
     featured: true,
 
     links: {
       store:
-        "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer"
-    }
+        "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer",
+    },
   },
 
   {
     id: "clipforge",
+    type: "project",
     title: "ClipForge AI Lite",
     slug: "clipforge-ai-lite",
     category: "ai",
@@ -84,13 +90,22 @@ export const projects: Project[] = [
     impact:
       "Established foundation for a production-grade mobile video editing system.",
 
+    seo: {
+      title: "ClipForge AI Lite | Case Study",
+      description:
+        "Mobile video editors lack CapCut-level timeline precision and transition parity.",
+      canonical: "/projects/clipforge-ai-lite",
+      ogType: "article",
+    },
+
     tech: ["Kotlin", "Media3", "OpenGL", "FFmpeg"],
 
-    featured: true
+    featured: true,
   },
 
   {
     id: "my-video-api",
+    type: "project",
     title: "My Video API",
     slug: "my-video-api",
     category: "backend",
@@ -106,20 +121,20 @@ export const projects: Project[] = [
     impact:
       "Enabled scalable async video processing and export pipeline architecture.",
 
+    seo: {
+      title: "My Video API | Case Study",
+      description:
+        "Video applications require backend rendering, storage, and async processing pipelines.",
+      canonical: "/projects/my-video-api",
+      ogType: "article",
+    },
+
     tech: ["Fastify", "TypeScript", "FFmpeg", "BullMQ", "Prisma", "PostgreSQL"],
 
-    featured: false
-  }
+    featured: false,
+  },
 ];
 
-export const projectDataSource: IDataSource<Project> = {
-  getAll() {
-    return projects;
-  },
-  getBySlug(slug) {
-    return projects.find((project) => project.slug === slug);
-  },
-  getFeatured() {
-    return projects.filter((project) => project.featured);
-  }
-};
+export const projectDataSource = new CachedDataLayer(
+  new LocalDataSource(projects)
+);

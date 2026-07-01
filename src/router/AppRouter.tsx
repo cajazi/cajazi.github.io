@@ -9,6 +9,18 @@ const ProjectDetailPage = lazy(() =>
   }))
 );
 
+const BlogPage = lazy(() =>
+  import("../pages/BlogPage").then((m) => ({
+    default: m.BlogPage,
+  }))
+);
+
+const BlogPostPage = lazy(() =>
+  import("../pages/BlogPostPage").then((m) => ({
+    default: m.BlogPostPage,
+  }))
+);
+
 const NotFoundPage = lazy(() =>
   import("../pages/NotFoundPage").then((m) => ({
     default: m.NotFoundPage,
@@ -29,6 +41,22 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div className="p-6 text-white">Loading...</div>}>
             <ProjectDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/blog",
+        element: (
+          <Suspense fallback={<div className="p-6 text-white">Loading...</div>}>
+            <BlogPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/blog/:slug",
+        element: (
+          <Suspense fallback={<div className="p-6 text-white">Loading...</div>}>
+            <BlogPostPage />
           </Suspense>
         ),
       },
