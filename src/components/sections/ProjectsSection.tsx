@@ -5,23 +5,42 @@ import { useDataSource } from "../../hooks/useDataSource";
 
 export function ProjectsSection() {
   const [filter, setFilter] = useState<"all" | "android" | "web" | "backend" | "ai">("all");
-  const { data } = useDataSource(() => projectDataSource.getAll(), []);
-  const projects = data ?? [];
+  const { data: result, loading, error } = useDataSource(
+    () => projectDataSource.getAllWithStatus(),
+    null
+  );
+  const projects = result?.data ?? [];
 
   const filteredProjects = projects.filter(
     (p) => filter === "all" || p.category === filter
   );
 
   return (
-    <section id="projects" className="px-6 py-20 max-w-6xl mx-auto">
+    <section id="projects" className="mx-auto max-w-6xl scroll-mt-20 px-6 py-20">
       <h2 className="text-3xl font-bold mb-6">Projects</h2>
+
+      {loading && (
+        <p role="status" className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4 text-slate-300">
+          Loading project case studies…
+        </p>
+      )}
+      {result?.degraded && (
+        <p role="status" className="mb-6 rounded-lg border border-amber-300/20 bg-amber-300/5 p-4 text-sm text-amber-100">
+          Live project updates are temporarily unavailable. Showing the verified portfolio copy.
+        </p>
+      )}
+      {error && !result && (
+        <p role="alert" className="mb-6 rounded-lg border border-red-300/20 bg-red-300/5 p-4 text-red-100">
+          Project case studies could not be loaded. Please try again later.
+        </p>
+      )}
 
       {/* FILTER BAR */}
       <div className="flex gap-2 mb-8 flex-wrap">
         {["all", "android", "web", "backend", "ai"].map((cat) => (
           <button
             key={cat}
-            onClick={() => setFilter(cat as any)}
+            onClick={() => setFilter(cat as typeof filter)}
             className={`px-3 py-1 rounded text-sm border transition duration-150 ease-out hover:scale-[1.02] active:scale-[0.98] ${
               filter === cat
                 ? "bg-cyan-500 text-black"
@@ -87,6 +106,9 @@ export function ProjectsSection() {
           </div>
         ))}
       </div>
+      {!loading && !error && filteredProjects.length === 0 && (
+        <p className="rounded-lg border border-white/10 bg-white/5 p-6 text-slate-300">No projects are available in this category yet.</p>
+      )}
     </section>
   );
 }

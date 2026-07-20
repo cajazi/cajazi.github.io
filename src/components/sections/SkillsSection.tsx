@@ -4,7 +4,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="border-t border-white/10 bg-slate-900 px-6 py-24"
+      className="scroll-mt-20 border-t border-white/10 bg-slate-900 px-6 py-24"
     >
       <Reveal className="mx-auto max-w-6xl">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">

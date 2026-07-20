@@ -1,6 +1,6 @@
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-6 py-24 md:py-36">
+    <section id="home" className="relative scroll-mt-20 overflow-hidden px-6 py-24 md:py-36">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_35%)]" />
 
       <div className="mx-auto grid max-w-6xl animate-[fadeUp_0.5s_ease-out] items-center gap-12 md:grid-cols-2">

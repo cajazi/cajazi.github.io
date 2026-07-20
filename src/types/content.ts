@@ -6,7 +6,7 @@ export type SeoFields = {
   ogType?: string;
 };
 
-export type ContentItemType = "project" | "blogPost" | "page";
+export type ContentItemType = "project" | "blogPost";
 
 export interface ContentItem {
   id: string;
@@ -21,12 +21,15 @@ export interface BlogPost extends ContentItem {
   title: string;
   excerpt: string;
   featured: boolean;
-  publishedAt?: string;
-}
-
-export interface PageContent extends ContentItem {
-  type: "page";
-  title: string;
-  body?: string;
-  featured: boolean;
+  publishedAt: string;
+  readingTime: string;
+  tags: string[];
+  cover: {
+    eyebrow: string;
+    gradient: string;
+  };
+  content: {
+    heading: string;
+    paragraphs: string[];
+  }[];
 }

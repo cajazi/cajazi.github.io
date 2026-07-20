@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">MusicEcho playback architecture</title><desc id="desc">Jetpack Compose connects through Kotlin state to Media3 playback and local music data.</desc>
+  <rect width="1200" height="675" fill="#020617"/><circle cx="1050" cy="80" r="250" fill="#0e7490" opacity=".18"/>
+  <text x="72" y="96" fill="#67e8f9" font-family="system-ui" font-size="22" font-weight="700">MUSICECHO PLAYER</text>
+  <text x="72" y="145" fill="white" font-family="system-ui" font-size="38" font-weight="800">Offline playback architecture</text>
+  <g font-family="system-ui" text-anchor="middle"><g fill="#0f172a" stroke="#22d3ee" stroke-width="3"><rect x="70" y="250" width="260" height="150" rx="22"/><rect x="470" y="250" width="260" height="150" rx="22"/><rect x="870" y="250" width="260" height="150" rx="22"/><rect x="470" y="480" width="260" height="110" rx="22"/></g>
+  <g fill="white" font-size="26" font-weight="700"><text x="200" y="320">Jetpack Compose</text><text x="600" y="320">Kotlin state</text><text x="1000" y="320">Media3 engine</text><text x="600" y="545">Local music data</text></g>
+  <g fill="#94a3b8" font-size="18"><text x="200" y="360">UI and controls</text><text x="600" y="360">Playback coordination</text><text x="1000" y="360">Audio sessions</text><text x="600" y="575">Playlists and favourites</text></g></g>
+  <g stroke="#22d3ee" stroke-width="4" fill="none"><path d="M330 325h140"/><path d="M730 325h140"/><path d="M600 400v80"/></g><g fill="#22d3ee"><path d="M470 325l-16-9v18z"/><path d="M870 325l-16-9v18z"/><path d="M600 480l-9-16h18z"/></g>
+</svg>

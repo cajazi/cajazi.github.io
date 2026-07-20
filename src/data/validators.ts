@@ -1,5 +1,5 @@
 import type { Project } from "./projects";
-import type { BlogPost, PageContent, SeoFields } from "../types/content";
+import type { BlogPost, SeoFields } from "../types/content";
 
 export function validateProjects(data: unknown): Project[] {
   return validateCollection(data, isProject, "Project");
@@ -7,10 +7,6 @@ export function validateProjects(data: unknown): Project[] {
 
 export function validateBlogPosts(data: unknown): BlogPost[] {
   return validateCollection(data, isBlogPost, "BlogPost");
-}
-
-export function validatePages(data: unknown): PageContent[] {
-  return validateCollection(data, isPageContent, "PageContent");
 }
 
 function validateCollection<T>(
@@ -62,26 +58,27 @@ function isBlogPost(item: unknown): item is BlogPost {
     typeof item.title === "string" &&
     typeof item.excerpt === "string" &&
     typeof item.featured === "boolean" &&
-    (item.publishedAt === undefined || typeof item.publishedAt === "string")
-  );
-}
-
-function isPageContent(item: unknown): item is PageContent {
-  if (!isRecord(item)) {
-    return false;
-  }
-
-  return (
-    isContentBase(item, "page") &&
-    typeof item.title === "string" &&
-    typeof item.featured === "boolean" &&
-    (item.body === undefined || typeof item.body === "string")
+    typeof item.publishedAt === "string" &&
+    typeof item.readingTime === "string" &&
+    Array.isArray(item.tags) &&
+    item.tags.every((tag) => typeof tag === "string") &&
+    isRecord(item.cover) &&
+    typeof item.cover.eyebrow === "string" &&
+    typeof item.cover.gradient === "string" &&
+    Array.isArray(item.content) &&
+    item.content.every(
+      (section) =>
+        isRecord(section) &&
+        typeof section.heading === "string" &&
+        Array.isArray(section.paragraphs) &&
+        section.paragraphs.every((paragraph) => typeof paragraph === "string")
+    )
   );
 }
 
 function isContentBase(
   item: Record<string, unknown>,
-  type: "project" | "blogPost" | "page"
+  type: "project" | "blogPost"
 ): boolean {
   return (
     typeof item.id === "string" &&
@@ -159,7 +156,13 @@ function isOptionalProjectMedia(value: unknown): boolean {
   return (
     Array.isArray(value) &&
     value.every(
-      (media) => isRecord(media) && typeof media.label === "string"
+      (media) =>
+        isRecord(media) &&
+        typeof media.label === "string" &&
+        typeof media.src === "string" &&
+        typeof media.alt === "string" &&
+        typeof media.width === "number" &&
+        typeof media.height === "number"
     )
   );
 }

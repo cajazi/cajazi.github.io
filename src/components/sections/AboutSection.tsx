@@ -4,7 +4,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="border-t border-white/10 bg-slate-950 px-6 py-24"
+      className="scroll-mt-20 border-t border-white/10 bg-slate-950 px-6 py-24"
     >
       <Reveal className="mx-auto max-w-6xl">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
