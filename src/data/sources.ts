@@ -4,7 +4,7 @@ export interface IDataSource<T extends { slug: string }> {
   getFeatured?(): Promise<T[]>;
 }
 
-const AVIORA_BASE_URL = "https://api.aviora.dev/api/v1";
+const AVIORA_BASE_URL = import.meta.env.VITE_AVIORA_BASE_URL ?? "https://api.aviora.dev/api/v1";
 const DEFAULT_TIMEOUT_MS = 6_000;
 const DEFAULT_RETRIES = 2;
 const RETRY_DELAYS_MS = [300, 900] as const;
@@ -98,15 +98,13 @@ export class APIDataSource<T extends { slug: string }>
 
         if (!this.shouldRetryStatus(response.status)) {
           throw new ApiRequestError(
-            `Aviora request failed with status ${response.status}`,
-            false
+            `Aviora request failed with status ${response.status}`
           );
         }
 
         if (attempt >= this.maxRetries) {
           throw new ApiRequestError(
-            `Aviora request failed with status ${response.status}`,
-            true
+            `Aviora request failed with status ${response.status}`
           );
         }
       } catch (error) {
@@ -255,9 +253,7 @@ const DEFAULT_CACHE_MAX_AGE_MS = 5 * 60 * 1000;
 
 export type AvioraResourcePath =
   | "/projects"
-  | "/blog"
-  | "/pages"
-  | "/profile";
+  | "/blog";
 
 interface APIDataSourceConfig<T extends { slug: string }> {
   init?: RequestInit;
@@ -281,17 +277,10 @@ class RetryableApiError extends Error {
 }
 
 class ApiRequestError extends Error {
-  readonly fallbackAllowed: boolean;
-
-  constructor(message: string, fallbackAllowed: boolean) {
+  constructor(message: string) {
     super(message);
     this.name = "ApiRequestError";
-    this.fallbackAllowed = fallbackAllowed;
   }
-}
-
-export function shouldFallbackToLocal(error: unknown): boolean {
-  return !(error instanceof ApiRequestError) || error.fallbackAllowed;
 }
 
 export function normalizeApiResponse<T>(

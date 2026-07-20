@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">My Video API rendering pipeline</title><desc id="desc">Fastify receives work, BullMQ queues it, FFmpeg workers process media, and Prisma stores state in PostgreSQL.</desc>
+  <rect width="1200" height="675" fill="#020617"/><circle cx="1080" cy="70" r="260" fill="#0891b2" opacity=".18"/>
+  <text x="72" y="96" fill="#67e8f9" font-family="system-ui" font-size="22" font-weight="700">MY VIDEO API</text><text x="72" y="145" fill="white" font-family="system-ui" font-size="38" font-weight="800">Asynchronous rendering pipeline</text>
+  <g font-family="system-ui" text-anchor="middle"><g fill="#0f172a" stroke="#22d3ee" stroke-width="3"><rect x="60" y="265" width="190" height="130" rx="22"/><rect x="320" y="265" width="190" height="130" rx="22"/><rect x="580" y="265" width="190" height="130" rx="22"/><rect x="840" y="190" width="280" height="110" rx="22"/><rect x="840" y="410" width="280" height="110" rx="22"/></g>
+  <g fill="white" font-size="24" font-weight="700"><text x="155" y="325">Fastify API</text><text x="415" y="325">BullMQ</text><text x="675" y="325">FFmpeg worker</text><text x="980" y="245">Prisma + PostgreSQL</text><text x="980" y="465">Rendered storage</text></g>
+  <g fill="#94a3b8" font-size="17"><text x="155" y="360">Request boundary</text><text x="415" y="360">Queued jobs</text><text x="675" y="360">Media processing</text><text x="980" y="278">Job state</text><text x="980" y="498">Export output</text></g></g>
+  <g stroke="#22d3ee" stroke-width="4" fill="none"><path d="M250 330h70"/><path d="M510 330h70"/><path d="M770 305l70-50"/><path d="M770 355l70 95"/></g>
+</svg>
