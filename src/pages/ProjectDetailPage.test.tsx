@@ -33,8 +33,27 @@ describe("ProjectDetailPage", () => {
       seo: { title: "Example", description: "Example project" }, media: [], links: { live: "https://example.com", github: "https://github.com/example/project", store: "https://play.google.com/store/apps/details?id=example" },
     }});
     renderPage();
-    expect(await screen.findByRole("link", { name: /live application/ })).toHaveAttribute("href", "https://example.com");
-    expect(screen.getByRole("link", { name: /source on GitHub/ })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Google Play/ })).toBeInTheDocument();
+    expect((await screen.findAllByRole("link", { name: /live application/ }))[0]).toHaveAttribute("href", "https://example.com");
+    expect(screen.getAllByRole("link", { name: /source on GitHub/ })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: /Google Play/ })).toHaveLength(2);
+  });
+
+  it("renders the live badge and a primary Play Store action above the case study", async () => {
+    getBySlugWithStatus.mockReset();
+    getBySlugWithStatus.mockResolvedValue({ source: "local-fallback", degraded: true, data: {
+      id: "musicecho", slug: "musicecho-player", type: "project", title: "MusicEcho Player", category: "android", status: "live", role: "Android Engineer", problem: "Problem", solution: "Solution", impact: "Outcome", tech: ["Kotlin"], featured: true,
+      seo: { title: "MusicEcho", description: "MusicEcho project" }, media: [], links: { store: "https://play.google.com/store/apps/details?id=com.player.echosound" },
+    }});
+    renderPage();
+
+    expect(await screen.findByText("live")).toBeInTheDocument();
+    expect(screen.getByText(/Showing the verified portfolio copy/)).toBeInTheDocument();
+    const heroActions = screen.getByTestId("project-hero-actions");
+    const primaryLink = heroActions.querySelector<HTMLAnchorElement>('a[aria-label="Open MusicEcho Player on Google Play"]');
+    expect(primaryLink).toHaveTextContent("View on Google Play");
+    expect(primaryLink).toHaveAttribute("href", "https://play.google.com/store/apps/details?id=com.player.echosound");
+    expect(primaryLink).toHaveAttribute("target", "_blank");
+    expect(primaryLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(screen.getAllByRole("link", { name: "Open MusicEcho Player on Google Play" })).toHaveLength(2);
   });
 });
