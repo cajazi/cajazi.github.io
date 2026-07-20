@@ -74,7 +74,7 @@ export const projects: Project[] = [
 
     links: {
       store:
-        "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer",
+        "https://play.google.com/store/apps/details?id=com.player.echosound",
     },
     expandableSections: [
       {

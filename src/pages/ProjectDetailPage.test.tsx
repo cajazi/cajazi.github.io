@@ -33,8 +33,8 @@ describe("ProjectDetailPage", () => {
       seo: { title: "Example", description: "Example project" }, media: [], links: { live: "https://example.com", github: "https://github.com/example/project", store: "https://play.google.com/store/apps/details?id=example" },
     }});
     renderPage();
-    expect(await screen.findByRole("link", { name: /Open live application/ })).toHaveAttribute("href", "https://example.com");
-    expect(screen.getByRole("link", { name: /View source on GitHub/ })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /View on Google Play/ })).toBeInTheDocument();
+    expect(await screen.findByRole("link", { name: /live application/ })).toHaveAttribute("href", "https://example.com");
+    expect(screen.getByRole("link", { name: /source on GitHub/ })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Google Play/ })).toBeInTheDocument();
   });
 });
