@@ -1,64 +1,45 @@
 import { useEffect } from "react";
+import { siteConfig } from "../config/site";
 import type { SeoFields } from "../types/content";
 
-function ensureMeta(selector: string, create: () => HTMLMetaElement) {
-  let element = document.querySelector<HTMLMetaElement>(selector);
+type CompleteSeoFields = SeoFields & { noIndex?: boolean };
 
+function setMeta(attribute: "name" | "property", key: string, value: string) {
+  const selector = `meta[${attribute}="${key}"]`;
+  let element = document.querySelector<HTMLMetaElement>(selector);
   if (!element) {
-    element = create();
+    element = document.createElement("meta");
+    element.setAttribute(attribute, key);
     document.head.appendChild(element);
   }
-
-  return element;
+  element.content = value;
 }
 
-function ensureCanonical() {
-  let canonical = document.querySelector<HTMLLinkElement>(
-    'link[rel="canonical"]'
-  );
-
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    document.head.appendChild(canonical);
-  }
-
-  return canonical;
-}
-
-export function useSeo(fields?: SeoFields) {
+export function useSeo(fields: CompleteSeoFields) {
   useEffect(() => {
-    if (!fields) {
-      return;
-    }
+    const canonicalUrl = new URL(fields.canonical ?? "/", siteConfig.url).href;
+    const imageUrl = new URL(fields.ogImage ?? siteConfig.defaultOgImage, siteConfig.url).href;
+    const type = fields.ogType ?? "website";
 
     document.title = fields.title;
+    setMeta("name", "description", fields.description);
+    setMeta("name", "robots", fields.noIndex ? "noindex, follow" : "index, follow");
+    setMeta("property", "og:title", fields.title);
+    setMeta("property", "og:description", fields.description);
+    setMeta("property", "og:url", canonicalUrl);
+    setMeta("property", "og:image", imageUrl);
+    setMeta("property", "og:type", type);
+    setMeta("name", "twitter:card", "summary_large_image");
+    setMeta("name", "twitter:title", fields.title);
+    setMeta("name", "twitter:description", fields.description);
+    setMeta("name", "twitter:image", imageUrl);
 
-    ensureMeta('meta[name="description"]', () => {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      return meta;
-    }).content = fields.description;
-
-    if (fields.ogImage) {
-      ensureMeta('meta[property="og:image"]', () => {
-        const meta = document.createElement("meta");
-        meta.setAttribute("property", "og:image");
-        return meta;
-      }).content = fields.ogImage;
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
     }
-
-    if (fields.ogType) {
-      ensureMeta('meta[property="og:type"]', () => {
-        const meta = document.createElement("meta");
-        meta.setAttribute("property", "og:type");
-        return meta;
-      }).content = fields.ogType;
-    }
-
-    if (fields.canonical) {
-      ensureCanonical().href = new URL(fields.canonical, window.location.origin)
-        .href;
-    }
-  }, [fields]);
+    canonical.href = canonicalUrl;
+  }, [fields.canonical, fields.description, fields.noIndex, fields.ogImage, fields.ogType, fields.title]);
 }

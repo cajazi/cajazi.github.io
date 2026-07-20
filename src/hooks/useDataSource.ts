@@ -20,11 +20,11 @@ export function useDataSource<T>(
   useEffect(() => {
     let active = true;
 
-    setState((current) => ({
-      ...current,
-      loading: true,
-      error: null,
-    }));
+    queueMicrotask(() => {
+      if (active) {
+        setState((current) => ({ ...current, loading: true, error: null }));
+      }
+    });
 
     Promise.resolve()
       .then(load)
@@ -50,6 +50,8 @@ export function useDataSource<T>(
     return () => {
       active = false;
     };
+    // The caller intentionally owns the dependency list, matching React's effect API.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return state;

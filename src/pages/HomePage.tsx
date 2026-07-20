@@ -1,5 +1,7 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { HeroSection } from "../components/sections/HeroSection";
+import { profileSeo } from "../data/profileSeo";
+import { useSeo } from "../hooks/useSeo";
 
 const AboutSection = lazy(() =>
   import("../components/sections/AboutSection").then((m) => ({
@@ -26,19 +28,7 @@ const ContactSection = lazy(() =>
 );
 
 export function HomePage() {
-  useEffect(() => {
-    let canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]'
-    );
-
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-
-    canonical.href = new URL("/", window.location.origin).href;
-  }, []);
+  useSeo(profileSeo);
 
   return (
     <>
