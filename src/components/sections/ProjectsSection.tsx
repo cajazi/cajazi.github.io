@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { projectDataSource } from "../../data/projects";
 import { useDataSource } from "../../hooks/useDataSource";
+import { ProjectExternalLinks } from "../projects/ProjectExternalLinks";
 
 export function ProjectsSection() {
   const [filter, setFilter] = useState<"all" | "android" | "web" | "backend" | "ai">("all");
@@ -103,6 +104,7 @@ export function ProjectsSection() {
             >
               View Project →
             </Link>
+            <ProjectExternalLinks links={project.links} projectTitle={project.title} className="mt-4" />
           </div>
         ))}
       </div>
