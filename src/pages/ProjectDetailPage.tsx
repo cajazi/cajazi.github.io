@@ -36,7 +36,6 @@ export function ProjectDetailPage() {
 
   return (
     <section className="mx-auto w-full min-w-0 max-w-6xl overflow-x-hidden px-6 py-20">
-      {result.degraded && <p role="status" className="mb-8 rounded-lg border border-amber-300/20 bg-amber-300/5 p-4 text-sm text-amber-100">Live project updates are temporarily unavailable. Showing the verified portfolio copy.</p>}
       <div className="max-w-3xl">
         <p className="text-sm text-cyan-300">{project.role} <span aria-hidden="true">•</span> {project.category}</p>
         <h1 className="mt-3 text-4xl font-bold text-white">{project.title}</h1>

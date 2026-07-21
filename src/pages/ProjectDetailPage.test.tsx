@@ -47,7 +47,7 @@ describe("ProjectDetailPage", () => {
     renderPage();
 
     expect(await screen.findByText("live")).toBeInTheDocument();
-    expect(screen.getByText(/Showing the verified portfolio copy/)).toBeInTheDocument();
+    expect(screen.queryByText(/Showing the verified portfolio copy/)).not.toBeInTheDocument();
     const heroActions = screen.getByTestId("project-hero-actions");
     const primaryLink = heroActions.querySelector<HTMLAnchorElement>('a[aria-label="Open MusicEcho Player on Google Play"]');
     expect(primaryLink).toHaveTextContent("View on Google Play");

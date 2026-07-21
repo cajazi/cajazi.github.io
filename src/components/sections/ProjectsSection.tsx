@@ -25,11 +25,6 @@ export function ProjectsSection() {
           Loading project case studies…
         </p>
       )}
-      {result?.degraded && (
-        <p role="status" className="mb-6 rounded-lg border border-amber-300/20 bg-amber-300/5 p-4 text-sm text-amber-100">
-          Live project updates are temporarily unavailable. Showing the verified portfolio copy.
-        </p>
-      )}
       {error && !result && (
         <p role="alert" className="mb-6 rounded-lg border border-red-300/20 bg-red-300/5 p-4 text-red-100">
           Project case studies could not be loaded. Please try again later.
