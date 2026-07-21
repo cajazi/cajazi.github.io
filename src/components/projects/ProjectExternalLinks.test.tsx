@@ -4,7 +4,7 @@ import { projects } from "../../data/projects";
 import { ProjectExternalLinks } from "./ProjectExternalLinks";
 
 const musicEcho = projects.find((project) => project.id === "musicecho");
-const verifiedPlayStoreUrl = "https://play.google.com/store/apps/details?id=com.player.echosound";
+const verifiedPlayStoreUrl = "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer";
 
 describe("ProjectExternalLinks", () => {
   it("renders MusicEcho as a direct external Google Play anchor with the verified package ID", () => {
@@ -16,7 +16,7 @@ describe("ProjectExternalLinks", () => {
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
     expect(link).toHaveAttribute("rel", expect.stringContaining("noreferrer"));
-    expect(new URL(link.getAttribute("href")!).searchParams.get("id")).toBe("com.player.echosound");
+    expect(new URL(link.getAttribute("href")!).searchParams.get("id")).toBe("com.dev.musicechoplayer");
   });
 
   it("does not render an invalid store URL as a Play Store button", () => {

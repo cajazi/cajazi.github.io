@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ProjectsSection } from "./ProjectsSection";
 
-const verifiedPlayStoreUrl = "https://play.google.com/store/apps/details?id=com.player.echosound";
+const verifiedPlayStoreUrl = "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer";
 
 afterEach(() => vi.unstubAllGlobals());
 
