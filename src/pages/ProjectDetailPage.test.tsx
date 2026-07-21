@@ -42,7 +42,7 @@ describe("ProjectDetailPage", () => {
     getBySlugWithStatus.mockReset();
     getBySlugWithStatus.mockResolvedValue({ source: "local-fallback", degraded: true, data: {
       id: "musicecho", slug: "musicecho-player", type: "project", title: "MusicEcho Player", category: "android", status: "live", role: "Android Engineer", problem: "Problem", solution: "Solution", impact: "Outcome", tech: ["Kotlin"], featured: true,
-      seo: { title: "MusicEcho", description: "MusicEcho project" }, media: [], links: { store: "https://play.google.com/store/apps/details?id=com.player.echosound" },
+      seo: { title: "MusicEcho", description: "MusicEcho project" }, media: [], links: { store: "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer" },
     }});
     renderPage();
 
@@ -51,7 +51,7 @@ describe("ProjectDetailPage", () => {
     const heroActions = screen.getByTestId("project-hero-actions");
     const primaryLink = heroActions.querySelector<HTMLAnchorElement>('a[aria-label="Open MusicEcho Player on Google Play"]');
     expect(primaryLink).toHaveTextContent("View on Google Play");
-    expect(primaryLink).toHaveAttribute("href", "https://play.google.com/store/apps/details?id=com.player.echosound");
+    expect(primaryLink).toHaveAttribute("href", "https://play.google.com/store/apps/details?id=com.dev.musicechoplayer");
     expect(primaryLink).toHaveAttribute("target", "_blank");
     expect(primaryLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.getAllByRole("link", { name: "Open MusicEcho Player on Google Play" })).toHaveLength(2);
